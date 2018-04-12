@@ -1,0 +1,26 @@
+version: '2.1'
+
+services:
+  spark-master:
+    extends:
+      file: ../docker-compose.yml
+      service: spark-master
+  spark-worker-1:
+    extends:
+      file: ../docker-compose.yml
+      service: spark-worker-1
+    links:
+      - spark-master
+  spark-worker-2:
+    extends:
+      file: ../docker-compose.yml
+      service: spark-worker-2
+    links:
+      - spark-master
+  spark-submit:
+    build: .
+    environment:
+      SPARK_APPLICATION_PYTHON_LOCATION: /app/stream.py
+      ENABLE_INIT_DAEMON: 'false'
+    links:
+      - spark-master
