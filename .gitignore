@@ -3,6 +3,7 @@ scala/target
 java/target
 pyspark/target
 .idea
+*.iml
 scala/.idea
 java/.idea
 python/lib
